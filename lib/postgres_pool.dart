@@ -43,8 +43,8 @@ class PgEndpoint {
   factory PgEndpoint.parse(url) {
     final uri = url is Uri ? url : Uri.parse(url as String);
     final userInfoParts = uri.userInfo.split(':');
-    final username = userInfoParts.length == 2 ? userInfoParts[0] : null;
-    final password = userInfoParts.length == 2 ? userInfoParts[1] : null;
+    final username = userInfoParts.length == 2 ? Uri.decodeComponent(userInfoParts[0]) : null;
+    final password = userInfoParts.length == 2 ? Uri.decodeComponent(userInfoParts[1]) : null;
     final isUnixSocketParam = uri.queryParameters['is-unix-socket'];
     return PgEndpoint(
       host: uri.host,
